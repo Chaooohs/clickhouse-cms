@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@100..900&family=Roboto:wght@300;400;700&display=swap");
+
+/* #region tags */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+button {
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+input {
+  outline: none;
+  border: none;
+
+}
+
+table {
+  border-spacing: 0;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+td img {
+  width: 50px;
+}
+
+/* #endregion */
+
+/* #region text */
+
+.text-xl {
+  font-family: Jost;
+  font-size: 36px;
+  line-height: 34px;
+  letter-spacing: 0.5px;
+}
+
+.text-md {
+  font-size: 18px;
+  line-height: 32px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+
+.text-lg {
+  font-size: 30px;
+  line-height: 32px;
+  letter-spacing: 0.5px;
+}
+
+.text-bd {
+  font-weight: bold;
+}
+
+.text-up {
+  text-transform: uppercase;
+}
+
+.text-gray {
+  color: #7d7d7d;
+}
+
+/* #endregion */
+
+/* #region common */
+
+.active {
+  color: red;
+}
+
+.page {
+  display: flex;
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 70px;
+}
+
+.images {
+  display: flex;
+  column-gap: 2px;
+}
+
+/* #endregion */

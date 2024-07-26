@@ -1,0 +1,21 @@
+.box {
+  display: flex;
+  margin-bottom: 92px;
+  column-gap: 16px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 28px;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 30px;
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    box-shadow: inset 0px 0px 5px 0px rgba(255, 153, 0, 0.877);
+  }
+}

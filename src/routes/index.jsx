@@ -1,0 +1,6 @@
+export * from './root'
+export * from './Admin/Admin'
+export * from './Dashboaurd/Dashbouard'
+export * from './Categories/Categories'
+export * from './Goods/Goods'
+export * from './LoginPage/LoginPage'
