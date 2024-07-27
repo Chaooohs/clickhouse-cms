@@ -11,7 +11,7 @@ import styles from './ChangeGoods.module.scss'
 
 export const ChangeGoods = ({ id }) => {
   const dispatch = useDispatch()
-  const {product, editStatus} = useSelector(state => state.product)
+  const { product, editStatus } = useSelector(state => state.product)
   const [answerToggle, setAnswerToggle] = useState(false)
   const [isString, setIsString] = useState(false)
 
@@ -47,23 +47,31 @@ export const ChangeGoods = ({ id }) => {
 
   // функция открытия окна Modal ответа на добавление
   useEffect(() => {
-    if(editStatus === 'success'){
+    if (editStatus === 'success') {
       setAnswerToggle(true)
       setIsString('Product updated!')
-    } 
+    }
   }, [editStatus])
-  
+
   // функция закрытия окна Modal ответа на добавление
   const handleClickOK = () => {
     setAnswerToggle(false)
     dispatch(toggleEditStatus('idle'))
   }
 
+  // функция закрытия окна Modal ответа на добавление с помощью Enter
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setAnswerToggle(false)
+      dispatch(toggleEditStatus('idle'))
+    }
+  }
+
   return (
     <div className="modal">
       {
         answerToggle &&
-        <AnswerModal string={isString} onClickOK={handleClickOK} />
+        <AnswerModal string={isString} onClickOK={handleClickOK} onKeyDown={onKeyDown} />
       }
       <div className="modal__content">
         <CloseButton onClickClose={onClickClose} />

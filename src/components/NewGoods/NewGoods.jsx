@@ -59,12 +59,19 @@ export const NewGoods = () => {
     dispatch(togglePostStatus('idle'))
   }
 
+   // функция закрытия окна Modal ответа на добавление с помощью Enter
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setAnswerToggle(false)
+      dispatch(togglePostStatus('idle'))
+    }
+  }
 
   return (
     <div className="modal">
       {
         answerToggle &&
-        <AnswerModal string={isString} onClickOK={handleClickOK} />
+        <AnswerModal string={isString} onClickOK={handleClickOK} onKeyDown={onKeyDown} />
       }
       <div className="modal__content">
         <CloseButton onClickClose={onClickClose} />
