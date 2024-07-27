@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import qs from 'qs'
 
-import { deleteGoods, fetchGoods, updateGoodsFetch } from "../../redux/goodsSlice"
+import { deleteGoods, fetchGoods, resetDelStatus, updateGoodsFetch } from "../../redux/goodsSlice"
 import { NewGoods, Pagination, AnswerModal, SearchByTitle, Select, ChangeGoods } from "../../components"
 import { toggleChangeGoods, toggleNewGoods } from "../../redux/toggleSlice"
 import { resetOffset } from "../../redux/filtersSlice"
@@ -32,7 +32,6 @@ export const Goods = () => {
     dispatch(updateGoodsFetch(false))
   }, [categoryId, title, offset, update])
 
-
   // запись в адресную строку
   useEffect(() => {
     const queryString = qs.stringify({
@@ -44,31 +43,26 @@ export const Goods = () => {
     navigate(`?${queryString}`)
   }, [categoryId, title, offset])
 
-
   // обнуление offset при смене категории
   useEffect(() => {
     dispatch(resetOffset(0))
   }, [categoryId])
-
 
   // открытие модалки добавления нового товара
   const onToggle = () => {
     dispatch(toggleNewGoods(true))
   }
 
-
-  const onChangeGoods = (id) => { 
-      dispatch(toggleChangeGoods(true))
-      setIsChangeId(id)
+  const onChangeGoods = (id) => {
+    dispatch(toggleChangeGoods(true))
+    setIsChangeId(id)
   }
-
 
   //  функция удаления продукта
   const onDeleteGoods = (id) => {
     dispatch(deleteGoods(id))
     dispatch(updateGoodsFetch(true))
   }
-
 
   // функция открытия окна Modal ответа на удаление
   useEffect(() => {
@@ -78,12 +72,19 @@ export const Goods = () => {
     }
   }, [delStatus])
 
-
   // функция закрытия окна Modal ответа на удаление
   const handleClickOK = () => {
     setAnswerToggle(false)
+    dispatch(resetDelStatus(false))
   }
 
+  // функция закрытия окна Modal ответа на добавление с помощью Enter
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setAnswerToggle(false)
+      dispatch(resetDelStatus(false))
+    }
+  }
 
   return (
     <div>
@@ -97,7 +98,7 @@ export const Goods = () => {
       }
       {
         answerToggle &&
-        <AnswerModal string={isStiring} onClickOK={handleClickOK} />
+        <AnswerModal string={isStiring} onClickOK={handleClickOK} onKeyDown={onKeyDown}/>
       }
       <header className="header">
         <nav>
