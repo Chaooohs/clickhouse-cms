@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom"
 import qs from 'qs'
 
 import { deleteGoods, fetchGoods, updateGoodsFetch } from "../../redux/goodsSlice"
-import { NewGoods, Pagination, AnswerModal, SearchByTitle, Select } from "../../components"
-import { toggleNewGoods } from "../../redux/toggleSlice"
+import { NewGoods, Pagination, AnswerModal, SearchByTitle, Select, ChangeGoods } from "../../components"
+import { toggleChangeGoods, toggleNewGoods } from "../../redux/toggleSlice"
 import { resetOffset } from "../../redux/filtersSlice"
 
 
@@ -14,9 +14,10 @@ export const Goods = () => {
   const dispatch = useDispatch()
   const { goods, update, delStatus } = useSelector(state => state.goods)
   const { categoryId, title, offset, limit, } = useSelector(state => state.filters)
-  const { newGoods } = useSelector(state => state.toggle)
-  const [questToggle, setQuestToggle] = useState(false)
+  const { newGoods, changeGoods } = useSelector(state => state.toggle)
+  const [answerToggle, setAnswerToggle] = useState(false)
   const [isStiring, setIsString] = useState()
+  const [isChangeId, setIsChangeId] = useState()
 
 
   // отправка запроса
@@ -56,6 +57,12 @@ export const Goods = () => {
   }
 
 
+  const onChangeGoods = (id) => { 
+      dispatch(toggleChangeGoods(true))
+      setIsChangeId(id)
+  }
+
+
   //  функция удаления продукта
   const onDeleteGoods = (id) => {
     dispatch(deleteGoods(id))
@@ -65,16 +72,16 @@ export const Goods = () => {
 
   // функция открытия окна Modal ответа на удаление
   useEffect(() => {
-    if(delStatus){
-      setQuestToggle(true)
+    if (delStatus) {
+      setAnswerToggle(true)
       setIsString('Product deleted!')
-    } 
+    }
   }, [delStatus])
 
 
   // функция закрытия окна Modal ответа на удаление
   const handleClickOK = () => {
-    setQuestToggle(false)
+    setAnswerToggle(false)
   }
 
 
@@ -85,8 +92,12 @@ export const Goods = () => {
         <NewGoods />
       }
       {
-        questToggle &&
-        <AnswerModal string={isStiring}  onClickOK={handleClickOK} />
+        changeGoods &&
+        <ChangeGoods id={isChangeId} />
+      }
+      {
+        answerToggle &&
+        <AnswerModal string={isStiring} onClickOK={handleClickOK} />
       }
       <header className="header">
         <nav>
@@ -130,7 +141,9 @@ export const Goods = () => {
                     </td>
                     <td>{prod.creationAt.slice(0, 10)}</td>
                     <td>{prod.updatedAt.slice(0, 10)}</td>
-                    <td>Edit</td>
+                    <td>
+                      <button onClick={() => onChangeGoods(prod.id)}>Edit</button>
+                    </td>
                     <td>
                       <button onClick={() => onDeleteGoods(prod.id)}>Delete</button>
                     </td>

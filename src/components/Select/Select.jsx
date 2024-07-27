@@ -1,10 +1,17 @@
 import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+
 import { addCategoryId } from "../../redux/filtersSlice"
+import { fetchCategories } from "../../redux/categories"
 
 
 export const Select = () => {
   const dispatch = useDispatch()
   const categories  = useSelector(state => state.categories.categories)
+
+  useEffect(() => {
+    dispatch(fetchCategories())
+  }, [])
 
   const onSelect = (e) => { 
       const id = e.target.value
