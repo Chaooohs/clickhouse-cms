@@ -1,16 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { toggleChangeGoods } from '../../redux/toggleSlice'
 import { CloseButton } from '../CloseButton/CloseButton'
-import { editSingleProduct, fetchSingleProduct } from '../../redux/singleProductSlice'
+import { editSingleProduct, fetchSingleProduct, toggleEditStatus } from '../../redux/singleProductSlice'
 import { updateGoodsFetch } from '../../redux/goodsSlice'
+import { AnswerModal } from '../AnswerModal/AnswerModal'
 import styles from './ChangeGoods.module.scss'
 
 
 export const ChangeGoods = ({ id }) => {
   const dispatch = useDispatch()
-  const product = useSelector(state => state.product.product)
+  const {product, editStatus} = useSelector(state => state.product)
+  const [answerToggle, setAnswerToggle] = useState(false)
+  const [isString, setIsString] = useState(false)
 
   // фунция получения продукта по id
   useEffect(() => {
@@ -42,15 +45,29 @@ export const ChangeGoods = ({ id }) => {
     dispatch(updateGoodsFetch(true))
   }
 
+  // функция открытия окна Modal ответа на добавление
+  useEffect(() => {
+    if(editStatus === 'success'){
+      setAnswerToggle(true)
+      setIsString('Product updated!')
+    } 
+  }, [editStatus])
+  
+  // функция закрытия окна Modal ответа на добавление
+  const handleClickOK = () => {
+    setAnswerToggle(false)
+    dispatch(toggleEditStatus('idle'))
+  }
+
   return (
     <div className="modal">
       {
-        // questToggle &&
-        // <AnswerModal string={isString} onClickOK={handleClickOK} />
+        answerToggle &&
+        <AnswerModal string={isString} onClickOK={handleClickOK} />
       }
       <div className="modal__content">
         <CloseButton onClickClose={onClickClose} />
-        <form className="form" id="newForm" onClick={onSubmit}>
+        <form className="form" id="newForm" >
           <label htmlFor="el1">title</label>
           <input type="text" name="title" id="el1" placeholder={product.title} />
 
@@ -60,7 +77,7 @@ export const ChangeGoods = ({ id }) => {
           <label htmlFor="el3">description</label>
           <textarea type="textarea" name="description" id="el3" placeholder={product.description} />
 
-          <input type="submit" placeholder="Create" defaultValue={'Create'} />
+          <input type="submit" placeholder="Create" defaultValue={'Create'} onClick={onSubmit} />
         </form>
       </div>
     </div>

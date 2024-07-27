@@ -39,7 +39,11 @@ export const editSingleProduct = createAsyncThunk(
 const goodsSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleEditStatus: (state, action) => {
+      state.editStatus = action.payload
+    }
+  },
 
   extraReducers(builder) {
     builder
@@ -60,5 +64,5 @@ const goodsSlice = createSlice({
   },
 })
 
-export const {} = goodsSlice.actions
+export const {toggleEditStatus} = goodsSlice.actions
 export default goodsSlice.reducer;

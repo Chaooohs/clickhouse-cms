@@ -10,7 +10,7 @@ import { AnswerModal } from "../AnswerModal/AnswerModal"
 export const NewGoods = () => {
   const dispatch = useDispatch()
   const postStatus = useSelector(state => state.goods.postStatus)
-  const [questToggle, setQuestToggle] = useState(false)
+  const [answerToggle, setAnswerToggle] = useState(false)
   const [isString, setIsString] = useState(false)
 
 
@@ -48,14 +48,14 @@ export const NewGoods = () => {
 // функция открытия окна Modal ответа на добавление
   useEffect(() => {
     if(postStatus === 'success'){
-      setQuestToggle(true)
+      setAnswerToggle(true)
       setIsString('Product saved!')
     } 
   }, [postStatus])
   
   // функция закрытия окна Modal ответа на добавление
   const handleClickOK = () => {
-    setQuestToggle(false)
+    setAnswerToggle(false)
     dispatch(togglePostStatus('idle'))
   }
 
@@ -63,12 +63,12 @@ export const NewGoods = () => {
   return (
     <div className="modal">
       {
-        questToggle &&
+        answerToggle &&
         <AnswerModal string={isString} onClickOK={handleClickOK} />
       }
       <div className="modal__content">
         <CloseButton onClickClose={onClickClose} />
-        <form className="form" id="newForm" onClick={onSubmit}>
+        <form className="form" id="newForm" >
           <label htmlFor="el1">title</label>
           <input type="text" name="title" id="el1" />
 
@@ -84,7 +84,7 @@ export const NewGoods = () => {
           <label htmlFor="el5">images</label>
           <input type="text" name="images" id="el5" />
 
-          <input type="submit" placeholder="Create" defaultValue={'Create'} />
+          <input type="submit" placeholder="Create" defaultValue={'Create'} onClick={onSubmit}/>
         </form>
       </div>
     </div>
