@@ -20,6 +20,9 @@ const filtersSlice = createSlice({
     addTitle: (state, action) => {
       state.title = action.payload
     },
+    resetOffset: (state, action) => {
+      state.offset = action.payload
+    },
     setFilters: (state, action) => {
       state.categoryId = action.payload.categoryId
       state.offset = action.payload.offset
@@ -27,5 +30,5 @@ const filtersSlice = createSlice({
   },
 })
 
-export const { addCategoryId, addOffset, setFilters, addTitle } = filtersSlice.actions
+export const { addCategoryId, addOffset, setFilters, addTitle, resetOffset } = filtersSlice.actions
 export default filtersSlice.reducer;

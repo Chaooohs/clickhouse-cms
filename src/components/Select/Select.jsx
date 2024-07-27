@@ -13,7 +13,7 @@ export const Select = () => {
 
   return (
     <select name="categories" id="cat" onChange={onSelect}>
-      <option value='' selected >All</option>
+      <option value='' defaultValue >All</option>
       {
         Array.isArray(categories) &&
         categories.map(category => {

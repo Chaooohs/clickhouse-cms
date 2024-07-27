@@ -4,6 +4,7 @@ import auth from './authSlice'
 import categories from './categories'
 import goods from './goodsSlice'
 import filters from './filtersSlice'
+import toggle from './toggleSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,5 +12,6 @@ export const store = configureStore({
     categories,
     goods,
     filters,
+    toggle,
   }
 })

@@ -1,19 +1,25 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import qs from 'qs'
 
-import { fetchGoods } from "../../redux/goodsSlice"
-import { Pagination, SearchByTitle, Select } from "../../components"
+import { deleteGoods, fetchGoods, updateGoodsFetch } from "../../redux/goodsSlice"
+import { NewGoods, Pagination, AnswerModal, SearchByTitle, Select } from "../../components"
+import { toggleNewGoods } from "../../redux/toggleSlice"
+import { resetOffset } from "../../redux/filtersSlice"
 
 
 export const Goods = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const goods = useSelector(state => state.goods.goods)
-  const { categoryId, title, offset, limit } = useSelector(state => state.filters)
+  const { goods, update, delStatus } = useSelector(state => state.goods)
+  const { categoryId, title, offset, limit, } = useSelector(state => state.filters)
+  const { newGoods } = useSelector(state => state.toggle)
+  const [questToggle, setQuestToggle] = useState(false)
+  const [isStiring, setIsString] = useState()
 
 
+  // отправка запроса
   useEffect(() => {
     const params = {
       categoryId,
@@ -22,9 +28,11 @@ export const Goods = () => {
       limit,
     }
     dispatch(fetchGoods(params))
-  }, [categoryId, title, offset])
+    dispatch(updateGoodsFetch(false))
+  }, [categoryId, title, offset, update])
 
 
+  // запись в адресную строку
   useEffect(() => {
     const queryString = qs.stringify({
       categoryId: categoryId === "" ? null : categoryId,
@@ -36,13 +44,56 @@ export const Goods = () => {
   }, [categoryId, title, offset])
 
 
+  // обнуление offset при смене категории
+  useEffect(() => {
+    dispatch(resetOffset(0))
+  }, [categoryId])
+
+
+  // открытие модалки добавления нового товара
+  const onToggle = () => {
+    dispatch(toggleNewGoods(true))
+  }
+
+
+  //  функция удаления продукта
+  const onDeleteGoods = (id) => {
+    dispatch(deleteGoods(id))
+    dispatch(updateGoodsFetch(true))
+  }
+
+
+  // функция открытия окна Modal ответа на удаление
+  useEffect(() => {
+    if(delStatus){
+      setQuestToggle(true)
+      setIsString('Product deleted!')
+    } 
+  }, [delStatus])
+
+
+  // функция закрытия окна Modal ответа на удаление
+  const handleClickOK = () => {
+    setQuestToggle(false)
+  }
+
+
   return (
     <div>
+      {
+        newGoods &&
+        <NewGoods />
+      }
+      {
+        questToggle &&
+        <AnswerModal string={isStiring}  onClickOK={handleClickOK} />
+      }
       <header className="header">
         <nav>
           <Select />
         </nav>
         <SearchByTitle />
+        <button onClick={onToggle}>New Product</button>
       </header>
       <main>
         <table>
@@ -55,7 +106,7 @@ export const Goods = () => {
               <th>image</th>
               <th>create</th>
               <th>update</th>
-              <th colspan='2'>actions</th>
+              <th colSpan={2}>actions</th>
             </tr>
           </thead>
           <tbody>
@@ -80,7 +131,9 @@ export const Goods = () => {
                     <td>{prod.creationAt.slice(0, 10)}</td>
                     <td>{prod.updatedAt.slice(0, 10)}</td>
                     <td>Edit</td>
-                    <td>Delete</td>
+                    <td>
+                      <button onClick={() => onDeleteGoods(prod.id)}>Delete</button>
+                    </td>
                   </tr>
                 )
               })
