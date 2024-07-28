@@ -38,7 +38,6 @@ export const NewCategory = () => {
       }
       dispatch(newCategory(a))
       dispatch(updateCategoryFetch(true))
-      console.log(a)
     }
   }
 

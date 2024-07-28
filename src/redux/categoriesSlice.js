@@ -2,10 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   categories: [],
+  singleCategory: {},
   status: 'idle',
   error: null,
   update: false,
   postStatus: 'idle',
+  editStatus: 'idle',
   delStatus: false,
 }
 
@@ -13,6 +15,14 @@ export const fetchCategories = createAsyncThunk(
   'categories/fetchCategories',
   async () => {
     const res = await fetch('https://api.escuelajs.co/api/v1/categories')
+    const data = await res.json()
+    return data
+  }
+)
+export const fetchSingleCategory = createAsyncThunk(
+  'categories/fetchSingleCategory',
+  async (id) => {
+    const res = await fetch(`https://api.escuelajs.co/api/v1/categories/${id}`)
     const data = await res.json()
     return data
   }
@@ -27,6 +37,23 @@ export const newCategory = createAsyncThunk(
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(a)
+    })
+    const data = await res.json()
+    return data
+  }
+)
+
+export const editCategory = createAsyncThunk(
+  'categories/editCategory',
+  async (params) => {
+    const res = await fetch(`https://api.escuelajs.co/api/v1/categories/${params.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: params.name,
+      })
     })
     const data = await res.json()
     return data
@@ -54,6 +81,9 @@ const categoriesSlice = createSlice({
     categoryPostStatus: (state, action) => {
       state.postStatus = action.payload
     },
+    resetCategoryChangeStatus: (state, action) => {
+      state.editStatus = action.payload
+    },
     resetCategoryDelStatus: (state, action) => {
       state.delStatus = action.payload
     },
@@ -72,6 +102,9 @@ const categoriesSlice = createSlice({
         state.status = 'fail'
         state.error = action.error.message
       })
+      .addCase(fetchSingleCategory.fulfilled, (state, action) => {
+        state.singleCategory = action.payload
+      })
       .addCase(newCategory.pending, (state) => {
         state.postStatus = 'in progress'
       })
@@ -83,11 +116,14 @@ const categoriesSlice = createSlice({
         state.postStatus = 'fail'
         state.error = action.error.message
       })
+      .addCase(editCategory.fulfilled, (state, action) => {
+        state.editStatus = 'success'
+      })
       .addCase(deleteCategory.fulfilled, (state, action) => {
         state.delStatus = action.payload
       })
   },
 })
 
-export const { updateCategoryFetch, categoryPostStatus, resetCategoryDelStatus } = categoriesSlice.actions
+export const { updateCategoryFetch, categoryPostStatus, resetCategoryChangeStatus, resetCategoryDelStatus } = categoriesSlice.actions
 export default categoriesSlice.reducer;

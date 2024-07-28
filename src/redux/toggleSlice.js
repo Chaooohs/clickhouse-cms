@@ -4,6 +4,7 @@ const initialState = {
   newGoods: false,
   changeGoods: false,
   newCategory: false,
+  changeCategory: false,
 }
 
 const toggleSlice = createSlice({
@@ -19,8 +20,11 @@ const toggleSlice = createSlice({
     toggleNewCategory: (state, action) => {
       state.newCategory = action.payload
     },
+    toggleChangeCategory: (state, action) => {
+      state.changeCategory = action.payload
+    },
   }
 })
 
-export const { toggleNewGoods, toggleChangeGoods, toggleNewCategory} = toggleSlice.actions
+export const { toggleNewGoods, toggleChangeGoods, toggleNewCategory, toggleChangeCategory } = toggleSlice.actions
 export default toggleSlice.reducer

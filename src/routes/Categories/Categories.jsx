@@ -2,18 +2,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 
 import { deleteCategory, fetchCategories, resetCategoryDelStatus, updateCategoryFetch } from "../../redux/categoriesSlice"
-import { toggleNewCategory } from "../../redux/toggleSlice"
-import { AnswerModal, NewCategory } from "../../components"
+import { toggleChangeCategory, toggleNewCategory } from "../../redux/toggleSlice"
+import { AnswerModal, ChangeCategory, NewCategory } from "../../components"
 
 
 
 export const Categories = () => {
   const dispatch = useDispatch()
   const { categories, update, delStatus } = useSelector(state => state.categories)
-  const newCategory = useSelector(state => state.toggle.newCategory)
+  const {newCategory, changeCategory} = useSelector(state => state.toggle)
   const [answerToggle, setAnswerToggle] = useState(false)
   const [isStiring, setIsString] = useState()
-
+  const [isChangeId, setIsChangeId] = useState()
 
   // получение списка категорий
   useEffect(() => {
@@ -21,12 +21,18 @@ export const Categories = () => {
   }, [update])
 
 
-  // открытие модалки добавления нового товара
+  // открытие модалки добавления новой категории
   const onToggle = () => {
     dispatch(toggleNewCategory(true))
   }
 
-  //  функция удаления продукта
+  // открытие модалки изменения категории
+  const onChangeCategory = (id) => {
+    dispatch(toggleChangeCategory(true))
+    setIsChangeId(id)
+  }
+
+  //  функция удаления категории
   const onDeleteCategory = (id) => {
     dispatch(deleteCategory(id))
     dispatch(updateCategoryFetch(true))
@@ -64,6 +70,10 @@ export const Categories = () => {
         <NewCategory />
       }
       {
+        changeCategory &&
+        <ChangeCategory id={isChangeId} />
+      }
+      {
         answerToggle &&
         <AnswerModal string={isStiring} onClickOK={handleClickOK} onKeyDown={onKeyDown} />
       }
@@ -96,7 +106,7 @@ export const Categories = () => {
                     <td>{categories.creationAt?.slice(0, 10)}</td>
                     <td>{categories.updatedAt?.slice(0, 10)}</td>
                     <td>
-                      {/* <button onClick={() => onChangeGoods(categories.id)}>Edit</button> */}
+                      <button onClick={() => onChangeCategory(categories.id)}>Edit</button>
                     </td>
                     <td>
                       <button onClick={() => onDeleteCategory(categories.id)}>Delete</button>
