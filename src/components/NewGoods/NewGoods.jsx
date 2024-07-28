@@ -45,21 +45,21 @@ export const NewGoods = () => {
     }
   }
 
-// функция открытия окна Modal ответа на добавление
+  // функция открытия окна Modal ответа на добавление
   useEffect(() => {
-    if(postStatus === 'success'){
+    if (postStatus === 'success') {
       setAnswerToggle(true)
       setIsString('Product created!')
-    } 
+    }
   }, [postStatus])
-  
+
   // функция закрытия окна Modal ответа на добавление
   const handleClickOK = () => {
     setAnswerToggle(false)
     dispatch(togglePostStatus('idle'))
   }
 
-   // функция закрытия окна Modal ответа на добавление с помощью Enter
+  // функция закрытия окна Modal ответа на добавление с помощью Enter
   const onKeyDown = (e) => {
     if (e.key === 'Enter') {
       setAnswerToggle(false)
@@ -76,22 +76,28 @@ export const NewGoods = () => {
       <div className="modal__content">
         <CloseButton onClickClose={onClickClose} />
         <form className="form" id="newForm" >
-          <label htmlFor="el1">title</label>
+          <label className="text-md text-cap" htmlFor="el1">title</label>
           <input type="text" name="title" id="el1" />
 
-          <label htmlFor="el2">price</label>
+          <label className="text-md text-cap" htmlFor="el2">price</label>
           <input type="number" name="price" id="el2" />
 
-          <label htmlFor="el3">description</label>
+          <label className="text-md text-cap" htmlFor="el3">description</label>
           <input type="textarea" name="description" id="el3" />
 
-          <label htmlFor="el4">categoryId</label>
+          <label className="text-md text-cap" htmlFor="el4">categoryId</label>
           <input type="number" name="categoryId" id="el4" />
 
-          <label htmlFor="el5">images</label>
+          <label className="text-md text-cap" htmlFor="el5">images</label>
           <input type="text" name="images" id="el5" />
 
-          <input type="submit" placeholder="Create" defaultValue={'Create'} onClick={onSubmit}/>
+          <input
+            className="button"
+            type="submit"
+            placeholder="Create"
+            defaultValue={'Create'}
+            onClick={onSubmit}
+          />
         </form>
       </div>
     </div>

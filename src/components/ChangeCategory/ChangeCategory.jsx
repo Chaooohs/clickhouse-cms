@@ -72,10 +72,16 @@ export const ChangeCategory = ({ id }) => {
       <div className="modal__content">
         <CloseButton onClickClose={onClickClose} />
         <form className="form" id="newForm" >
-          <label htmlFor="el1">name</label>
+          <label htmlFor="el1" className='text-md text-cap'>name</label>
           <input type="text" name="name" id="el1" placeholder={singleCategory.name} />
 
-          <input type="submit" placeholder="Create" defaultValue={'Create'} onClick={onSubmit} />
+          <input
+            type="submit"
+            placeholder="Create"
+            defaultValue={'Create'}
+            onClick={onSubmit}
+            className='button'
+          />
         </form>
       </div>
     </div>

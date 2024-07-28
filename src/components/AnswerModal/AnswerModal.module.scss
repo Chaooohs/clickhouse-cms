@@ -16,16 +16,29 @@
   max-width: 250px;
   width: 100%;
   height: 150px;
-  border: 1px solid #000;
+  border-radius: 30px;
+  border: 1px solid #0000002b;
+  box-shadow: inset 0 0 10px #0000000d;
   background-color: #fff;
   box-sizing: border-box;
 }
 
 .title {
+  font-size: 18px;
   margin: auto;
 }
 
 .button {
   width: 100%;
-  border: 1px solid #000;
+  height: 54px;
+  border-radius: 0px 0px 30px 30px;
+  background-color: #ff8a1e;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #fff;
+  transition: all .2s linear;
+  cursor: pointer;
+  &:hover {
+    background-color: #ff7a00;
+  }
 }

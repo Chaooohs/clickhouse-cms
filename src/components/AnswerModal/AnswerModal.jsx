@@ -14,7 +14,14 @@ export const AnswerModal = ({ string, onClickOK, onKeyDown }) => {
     <div className={styles.modal}>
       <div className={styles.content}>
         <div className={styles.title}>{string}</div>
-        <button ref={ref} className={styles.button} onClick={onClickOK} onKeyDown={onKeyDown}>ok</button>
+        <button
+          ref={ref}
+          className={styles.button}
+          onClick={onClickOK}
+          onKeyDown={onKeyDown}
+        >
+          ok
+        </button>
       </div>
     </div>
   )

@@ -6,7 +6,6 @@ import { CloseButton } from '../CloseButton/CloseButton'
 import { editSingleProduct, fetchSingleProduct, toggleEditStatus } from '../../redux/singleProductSlice'
 import { updateGoodsFetch } from '../../redux/goodsSlice'
 import { AnswerModal } from '../AnswerModal/AnswerModal'
-import styles from './ChangeGoods.module.scss'
 
 
 export const ChangeGoods = ({ id }) => {
@@ -76,16 +75,22 @@ export const ChangeGoods = ({ id }) => {
       <div className="modal__content">
         <CloseButton onClickClose={onClickClose} />
         <form className="form" id="newForm" >
-          <label htmlFor="el1">title</label>
+          <label className='text-md text-cap' htmlFor="el1">title</label>
           <input type="text" name="title" id="el1" placeholder={product.title} />
 
-          <label htmlFor="el2">price</label>
+          <label className='text-md text-cap' htmlFor="el2">price</label>
           <input type="number" name="price" id="el2" placeholder={product.price} />
 
-          <label htmlFor="el3">description</label>
+          <label className='text-md text-cap' htmlFor="el3">description</label>
           <textarea type="textarea" name="description" id="el3" placeholder={product.description} />
 
-          <input type="submit" placeholder="Create" defaultValue={'Create'} onClick={onSubmit} />
+          <input
+            className='button'
+            type="submit"
+            placeholder="Create"
+            defaultValue={'Create'}
+            onClick={onSubmit}
+          />
         </form>
       </div>
     </div>

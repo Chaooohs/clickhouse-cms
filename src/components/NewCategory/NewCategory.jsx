@@ -43,12 +43,12 @@ export const NewCategory = () => {
 
   // функция открытия окна Modal ответа на добавление
   useEffect(() => {
-    if(postStatus === 'success'){
+    if (postStatus === 'success') {
       setAnswerToggle(true)
       setIsString('Category created!')
-    } 
+    }
   }, [postStatus])
-  
+
   // функция закрытия окна Modal ответа на добавление
   const handleClickOK = () => {
     setAnswerToggle(false)
@@ -56,7 +56,7 @@ export const NewCategory = () => {
     dispatch(updateCategoryFetch(false))
   }
 
-   // функция закрытия окна Modal ответа на добавление с помощью Enter
+  // функция закрытия окна Modal ответа на добавление с помощью Enter
   const onKeyDown = (e) => {
     if (e.key === 'Enter') {
       setAnswerToggle(false)
@@ -74,13 +74,19 @@ export const NewCategory = () => {
       <div className="modal__content">
         <CloseButton onClickClose={onClickClose} />
         <form className="form" id="newForm" >
-          <label htmlFor="el1">name</label>
+          <label className="text-md text-cap" htmlFor="el1">name</label>
           <input type="text" name="name" id="el1" />
 
-          <label htmlFor="el5">image</label>
+          <label className="text-md text-cap" htmlFor="el5">image</label>
           <input type="text" name="image" id="el5" />
 
-          <input type="submit" placeholder="Create" defaultValue={'Create'} onClick={onSubmit} />
+          <input
+            type="submit"
+            placeholder="Create"
+            defaultValue={'Create'}
+            onClick={onSubmit}
+            className="button"
+          />
         </form>
       </div>
     </div>
