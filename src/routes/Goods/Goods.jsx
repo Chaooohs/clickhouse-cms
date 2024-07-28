@@ -53,6 +53,7 @@ export const Goods = () => {
     dispatch(toggleNewGoods(true))
   }
 
+  // открытие модалки изменения товара
   const onChangeGoods = (id) => {
     dispatch(toggleChangeGoods(true))
     setIsChangeId(id)

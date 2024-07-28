@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 
 import { addCategoryId } from "../../redux/filtersSlice"
-import { fetchCategories } from "../../redux/categories"
+import { fetchCategories } from "../../redux/categoriesSlice"
 
 
 export const Select = () => {

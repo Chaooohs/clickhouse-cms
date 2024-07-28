@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import auth from './authSlice'
-import categories from './categories'
+import categories from './categoriesSlice'
 import goods from './goodsSlice'
 import filters from './filtersSlice'
 import toggle from './toggleSlice'

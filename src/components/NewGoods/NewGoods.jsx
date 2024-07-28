@@ -49,7 +49,7 @@ export const NewGoods = () => {
   useEffect(() => {
     if(postStatus === 'success'){
       setAnswerToggle(true)
-      setIsString('Product saved!')
+      setIsString('Product created!')
     } 
   }, [postStatus])
   

@@ -4,6 +4,9 @@ const initialState = {
   categories: [],
   status: 'idle',
   error: null,
+  update: false,
+  postStatus: 'idle',
+  delStatus: false,
 }
 
 export const fetchCategories = createAsyncThunk(
@@ -17,7 +20,7 @@ export const fetchCategories = createAsyncThunk(
 
 export const newCategory = createAsyncThunk(
   'categories/newCategory',
-  async (a, dispatch) => {
+  async (a) => {
     const res = await fetch('https://api.escuelajs.co/api/v1/categories/', {
       method: 'POST',
       headers: {
@@ -26,7 +29,18 @@ export const newCategory = createAsyncThunk(
       body: JSON.stringify(a)
     })
     const data = await res.json()
-    dispatch(addCategory(data));
+    return data
+  }
+)
+
+export const deleteCategory = createAsyncThunk(
+  'goods/deleteCategory',
+  async (id) => {
+    const res = await fetch(`https://api.escuelajs.co/api/v1/categories/${id}`, {
+      method: 'DELETE',
+    })
+    const data = await res.json()
+    return data
   }
 )
 
@@ -34,8 +48,14 @@ const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
-    addCategory: (state, action) => {
-      state.categories.push(action.payload)
+    updateCategoryFetch: (state, action) => {
+      state.update = action.payload
+    },
+    categoryPostStatus: (state, action) => {
+      state.postStatus = action.payload
+    },
+    resetCategoryDelStatus: (state, action) => {
+      state.delStatus = action.payload
     },
   },
 
@@ -52,8 +72,22 @@ const categoriesSlice = createSlice({
         state.status = 'fail'
         state.error = action.error.message
       })
+      .addCase(newCategory.pending, (state) => {
+        state.postStatus = 'in progress'
+      })
+      .addCase(newCategory.fulfilled, (state, action) => {
+        state.postStatus = 'success'
+        state.categories.push(action.payload)
+      })
+      .addCase(newCategory.rejected, (state, action) => {
+        state.postStatus = 'fail'
+        state.error = action.error.message
+      })
+      .addCase(deleteCategory.fulfilled, (state, action) => {
+        state.delStatus = action.payload
+      })
   },
 })
 
-export const { addCategory } = categoriesSlice.actions
+export const { updateCategoryFetch, categoryPostStatus, resetCategoryDelStatus } = categoriesSlice.actions
 export default categoriesSlice.reducer;
