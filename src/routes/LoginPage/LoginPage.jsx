@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux"
 
 import { fetchAuth } from "../../redux/authSlice"
+import styles from './LoginPage.module.scss'
 
 
 
@@ -21,11 +22,11 @@ export const LoginPage = () => {
 
 
   return (
-    <div>
+    <main className={styles.main}>
       <h1>
-        Login page
+        Sign In
       </h1>
-      <p>admin@mail.com</p>
+      <div>admin@mail.com</div>
       <p>admin123</p>
 
       <form id="formAuth" onSubmit={onSubmit} >
@@ -33,14 +34,16 @@ export const LoginPage = () => {
           type="email"
           name="email"
           placeholder="email"
+          className={styles.input}
         />
         <input
           type="password"
           name="password"
           placeholder="password"
+          className={styles.input}
         />
-        <input type="submit" placeholder="Sing In" />
+        <input type="submit" placeholder="Sing In" className="button" />
       </form>
-    </div>
+    </main>
   )
 }

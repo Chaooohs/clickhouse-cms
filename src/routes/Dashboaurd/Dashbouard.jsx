@@ -3,8 +3,10 @@
 export const Dashboard = () => {
 
   return (
-    <h1>
-      DashboardPage
-    </h1>
+    <div className="layout">
+      <h1 className="text-xl">
+        DashboardPage
+      </h1>
+    </div>
   )
 }

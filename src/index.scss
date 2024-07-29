@@ -13,6 +13,7 @@ body {
 
 a {
   text-decoration: none;
+  color: #000;
 }
 
 img {
@@ -49,16 +50,21 @@ input {
   &:hover {
     box-shadow: inset 0px 0px 5px 0px rgba(255, 153, 0, 0.3);
   }
+
+  &::placeholder {
+    color: #c0c0c0;
+  }
 }
 
 table {
   border-spacing: 0;
+  width: 100%;
 }
 
 table,
 th,
 td {
-  border: 1px solid black;
+  border: 1px solid #F8F8F8;
 }
 
 td img {
@@ -112,18 +118,29 @@ td img {
 /* #region common */
 
 .active {
-  color: red;
+  color: #FF9900;
 }
 
 .page {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   max-width: 1920px;
   width: 100%;
   margin: 0 auto;
 }
 
+.layout {
+  box-sizing: border-box;
+  padding: 0 28px;
+}
+
+.main {
+  margin-top: 24px;
+}
+
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   height: 70px;
 }
@@ -142,6 +159,7 @@ td img {
   margin-top: 24px;
   color: #fff;
   cursor: pointer;
+
   &:hover {
     background-color: #ff7a00;
   }

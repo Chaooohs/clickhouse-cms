@@ -34,8 +34,14 @@ export const SearchByTitle = () => {
 
   return (
     <form>
-      <label htmlFor="byName">Search by title</label>
-      <input type="text" id="byName" defaultValue={value} onChange={onSearchByTitle} />
+      {/* <label htmlFor="byName">Search by title</label> */}
+      <input
+        type="text"
+        id="byName"
+        defaultValue={value}
+        onChange={onSearchByTitle}
+        placeholder="Search by title"
+      />
     </form>
   )
 }

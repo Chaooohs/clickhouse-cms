@@ -7,6 +7,7 @@ import { deleteGoods, fetchGoods, resetDelStatus, updateGoodsFetch } from "../..
 import { NewGoods, Pagination, AnswerModal, SearchByTitle, Select, ChangeGoods } from "../../components"
 import { toggleChangeGoods, toggleNewGoods } from "../../redux/toggleSlice"
 import { resetOffset } from "../../redux/filtersSlice"
+import styles from './Goods.module.scss'
 
 
 export const Goods = () => {
@@ -88,7 +89,7 @@ export const Goods = () => {
   }
 
   return (
-    <div>
+    <div className="layout">
       {
         newGoods &&
         <NewGoods />
@@ -101,15 +102,16 @@ export const Goods = () => {
         answerToggle &&
         <AnswerModal string={isStiring} onClickOK={handleClickOK} onKeyDown={onKeyDown}/>
       }
+      <h1 className="text-xl">Goods page</h1>
       <header className="header">
         <nav>
           <Select />
         </nav>
         <SearchByTitle />
-        <button onClick={onToggle}>New Product</button>
+        <button className={`button text-md ${styles.button}`} onClick={onToggle}>New Product</button>
       </header>
-      <main>
-        <table>
+      <main className="main">
+        <table className="text-md">
           <thead>
             <tr>
               <th>id</th>

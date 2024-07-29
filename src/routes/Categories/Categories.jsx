@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { deleteCategory, fetchCategories, resetCategoryDelStatus, updateCategoryFetch } from "../../redux/categoriesSlice"
 import { toggleChangeCategory, toggleNewCategory } from "../../redux/toggleSlice"
 import { AnswerModal, ChangeCategory, NewCategory } from "../../components"
-
+import styles from './Categories.module.scss'
 
 
 export const Categories = () => {
@@ -64,7 +64,7 @@ export const Categories = () => {
 
 
   return (
-    <div>
+    <div className="layout">
       {
         newCategory &&
         <NewCategory />
@@ -77,11 +77,12 @@ export const Categories = () => {
         answerToggle &&
         <AnswerModal string={isStiring} onClickOK={handleClickOK} onKeyDown={onKeyDown} />
       }
+      <h1 className="text-xl">Categories page</h1>
       <header className="header">
-        <button onClick={onToggle}>New category</button>
+        <button className={`button text-md ${styles.button}`} onClick={onToggle}>New category</button>
       </header>
-      <main>
-        <table>
+      <main className="main">
+        <table className="text-md">
           <thead>
             <tr>
               <th>id</th>

@@ -7,9 +7,9 @@ export const SideBar = () => {
   return (
     <aside className={styles.aside}>
       <nav className={styles.nav}>
-        <NavLink to='/admin/dashboard'> Dashboard</NavLink>
-        <NavLink to='/admin/categories'> Categories</NavLink>
-        <NavLink to='/admin/goods'> Goods</NavLink>
+        <NavLink className='text-lg text-cap text-bd' to='/admin/dashboard'> Dashboard</NavLink>
+        <NavLink className='text-lg text-cap text-bd' to='/admin/categories'> Categories</NavLink>
+        <NavLink className='text-lg text-cap text-bd' to='/admin/goods'> Goods</NavLink>
       </nav>
     </aside>
   )
