@@ -56,6 +56,20 @@ input {
   }
 }
 
+select {
+  width: 200px;
+  height: 32px;
+  border-radius: 36px;
+  background: #fff;
+  font-size: 14px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 10px #0000000d;
+  border: none;
+  // outline: none;
+  font-size: 14px;
+}
+
 table {
   border-spacing: 0;
   width: 100%;
@@ -140,7 +154,7 @@ td img {
 
 .header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   height: 70px;
 }
@@ -158,6 +172,7 @@ td img {
   background-color: #ff8a1e;
   margin-top: 24px;
   color: #fff;
+  transition: all .2s linear;
   cursor: pointer;
 
   &:hover {

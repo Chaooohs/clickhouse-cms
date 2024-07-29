@@ -1,5 +1,14 @@
 .button {
-  justify-self: flex-end;
   width: 10rem;
   margin-top: 0;
+  height: 54px;
+  border-radius: 32px;
+  background-color: #ff8a1e;
+  color: #fff;
+  transition: all .2s linear;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ff7a00;
+  }
 }

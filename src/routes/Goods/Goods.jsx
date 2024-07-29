@@ -20,7 +20,6 @@ export const Goods = () => {
   const [isStiring, setIsString] = useState()
   const [isChangeId, setIsChangeId] = useState()
 
-
   // отправка запроса
   useEffect(() => {
     const params = {
@@ -108,7 +107,7 @@ export const Goods = () => {
           <Select />
         </nav>
         <SearchByTitle />
-        <button className={`button text-md ${styles.button}`} onClick={onToggle}>New Product</button>
+        <button className={`text-md ${styles.button}`} onClick={onToggle}>New Product</button>
       </header>
       <main className="main">
         <table className="text-md">

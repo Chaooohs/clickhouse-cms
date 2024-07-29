@@ -26,5 +26,5 @@ const toggleSlice = createSlice({
   }
 })
 
-export const { toggleNewGoods, toggleChangeGoods, toggleNewCategory, toggleChangeCategory } = toggleSlice.actions
+export const { toggleNewGoods, toggleChangeGoods, toggleNewCategory, toggleChangeCategory, } = toggleSlice.actions
 export default toggleSlice.reducer

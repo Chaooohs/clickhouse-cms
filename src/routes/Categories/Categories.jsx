@@ -79,7 +79,7 @@ export const Categories = () => {
       }
       <h1 className="text-xl">Categories page</h1>
       <header className="header">
-        <button className={`button text-md ${styles.button}`} onClick={onToggle}>New category</button>
+        <button className={`text-md ${styles.button}`} onClick={onToggle}>New category</button>
       </header>
       <main className="main">
         <table className="text-md">

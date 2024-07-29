@@ -1,0 +1,58 @@
+.search {
+  position: relative;
+  justify-self: center;
+  &__input {
+    font-size: 18px;
+    width: 496px;
+    height: 54px;
+    border-radius: 30px;
+    background: transparent;
+    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    padding: 0 28px;
+    transition: all 0.2s linear;
+    &::placeholder {
+      font-size: 18px;
+      letter-spacing: 0.5px;
+      color: #7d7d7d;
+    }
+    &:hover {
+      box-shadow: inset 0px 0px 10px 0px rgba(255, 153, 0, 0.3);
+    }
+  }
+  &__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 22px;
+  }
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 1336px) {
+  .search {
+    max-width: 360px;
+    margin: 0 28px;
+    &__input {
+      font-size: 14px;
+      width: 100%;
+      height: 38px;
+      padding: 0 22px;
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+    &__button {
+      position: absolute;
+      top: 11px;
+      right: 22px;
+    }
+    &__icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
