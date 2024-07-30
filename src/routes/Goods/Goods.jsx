@@ -156,8 +156,8 @@ export const Goods = () => {
             }
           </tbody>
         </table>
-        <Pagination />
       </main>
+        <Pagination />
     </div>
   )
 }
