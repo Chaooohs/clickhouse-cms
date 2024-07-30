@@ -232,11 +232,10 @@ td img {
   background-color: #ff8a1e;
   margin-top: 24px;
   color: #fff;
-  transition: all .2s linear;
   cursor: pointer;
 
   &:hover {
-    background-color: #ff7a00;
+    text-decoration: underline;
   }
 }
 

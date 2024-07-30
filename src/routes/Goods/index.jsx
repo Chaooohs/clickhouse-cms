@@ -1,0 +1,1 @@
+export { Goods as default } from './Goods'
