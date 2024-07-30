@@ -20,7 +20,6 @@ export const Categories = () => {
     dispatch(fetchCategories())
   }, [update])
 
-
   // открытие модалки добавления новой категории
   const onToggle = () => {
     dispatch(toggleNewCategory(true))
@@ -107,10 +106,10 @@ export const Categories = () => {
                     <td>{categories.creationAt?.slice(0, 10)}</td>
                     <td>{categories.updatedAt?.slice(0, 10)}</td>
                     <td>
-                      <button onClick={() => onChangeCategory(categories.id)}>Edit</button>
+                      <button className="up-btn" onClick={() => onChangeCategory(categories.id)}>Update</button>
                     </td>
                     <td>
-                      <button onClick={() => onDeleteCategory(categories.id)}>Delete</button>
+                      <button className="del-btn" onClick={() => onDeleteCategory(categories.id)}>Delete</button>
                     </td>
                   </tr>
                 )

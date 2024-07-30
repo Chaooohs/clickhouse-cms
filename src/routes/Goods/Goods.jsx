@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import qs from 'qs'
 
@@ -11,6 +11,7 @@ import styles from './Goods.module.scss'
 
 
 export const Goods = () => {
+  const ref = useRef()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { goods, update, delStatus } = useSelector(state => state.goods)
@@ -20,6 +21,10 @@ export const Goods = () => {
   const [isStiring, setIsString] = useState()
   const [isChangeId, setIsChangeId] = useState()
 
+  useEffect(() => {
+    ref.current.scrollTo(0, 0)
+  }, [offset])
+  
   // отправка запроса
   useEffect(() => {
     const params = {
@@ -88,7 +93,7 @@ export const Goods = () => {
   }
 
   return (
-    <div className="layout">
+    <div className="layout" ref={ref}>
       {
         newGoods &&
         <NewGoods />
@@ -99,7 +104,7 @@ export const Goods = () => {
       }
       {
         answerToggle &&
-        <AnswerModal string={isStiring} onClickOK={handleClickOK} onKeyDown={onKeyDown}/>
+        <AnswerModal string={isStiring} onClickOK={handleClickOK} onKeyDown={onKeyDown} />
       }
       <h1 className="text-xl">Goods page</h1>
       <header className="header">
@@ -145,10 +150,10 @@ export const Goods = () => {
                     <td>{prod.creationAt.slice(0, 10)}</td>
                     <td>{prod.updatedAt.slice(0, 10)}</td>
                     <td>
-                      <button onClick={() => onChangeGoods(prod.id)}>Edit</button>
+                      <button className="up-btn" onClick={() => onChangeGoods(prod.id)}>Update</button>
                     </td>
                     <td>
-                      <button onClick={() => onDeleteGoods(prod.id)}>Delete</button>
+                      <button className="del-btn" onClick={() => onDeleteGoods(prod.id)}>Delete</button>
                     </td>
                   </tr>
                 )
@@ -157,7 +162,7 @@ export const Goods = () => {
           </tbody>
         </table>
       </main>
-        <Pagination />
+      <Pagination />
     </div>
   )
 }

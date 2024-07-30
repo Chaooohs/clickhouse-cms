@@ -5,7 +5,12 @@
   justify-content: center;
   height: 100vh;
 }
-
+.form {
+  max-width: 24rem;
+  @media (max-width: 1335px) {
+      max-width: 20rem;
+  }
+}
 .input {
   margin-top: 12px;
 }

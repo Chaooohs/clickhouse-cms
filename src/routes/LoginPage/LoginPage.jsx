@@ -29,7 +29,7 @@ export const LoginPage = () => {
       <div>admin@mail.com</div>
       <p>admin123</p>
 
-      <form id="formAuth" onSubmit={onSubmit} >
+      <form className={styles.form} id="formAuth" onSubmit={onSubmit} >
         <input
           type="email"
           name="email"
