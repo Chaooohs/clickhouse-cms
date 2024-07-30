@@ -83,7 +83,7 @@ export const NewGoods = () => {
           <input type="number" name="price" id="el2" />
 
           <label className="text-md text-cap" htmlFor="el3">description</label>
-          <input type="textarea" name="description" id="el3" />
+          <textarea type="textarea" name="description" id="el3" />
 
           <label className="text-md text-cap" htmlFor="el4">categoryId</label>
           <input type="number" name="categoryId" id="el4" />

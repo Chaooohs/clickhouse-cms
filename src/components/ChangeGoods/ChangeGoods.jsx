@@ -82,7 +82,12 @@ export const ChangeGoods = ({ id }) => {
           <input type="number" name="price" id="el2" placeholder={product.price} />
 
           <label className='text-md text-cap' htmlFor="el3">description</label>
-          <textarea type="textarea" name="description" id="el3" placeholder={product.description} />
+          <textarea
+            type="textarea"
+            name="description"
+            id="el3"
+            placeholder={product.description}
+          />
 
           <input
             className='button'
