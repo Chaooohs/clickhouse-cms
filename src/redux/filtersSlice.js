@@ -4,7 +4,7 @@ const initialState = {
   categoryId: '',
   title: '',
   offset: 0,
-  limit: 10,
+  limit: 100,
 }
 
 const filtersSlice = createSlice({

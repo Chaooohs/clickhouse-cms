@@ -4,7 +4,6 @@ import { useEffect } from "react"
 import { addCategoryId } from "../../redux/filtersSlice"
 import { fetchCategories } from "../../redux/categoriesSlice"
 
-
 export const Select = () => {
   const dispatch = useDispatch()
   const categories  = useSelector(state => state.categories.categories)
@@ -25,7 +24,7 @@ export const Select = () => {
         Array.isArray(categories) &&
         categories.map(category => {
           return (
-            <option value={category.id} key={category.id} >{category.name}</option>
+            <option value={category.id} key={category.id}>{category.name}</option>
           )
         })
       }
