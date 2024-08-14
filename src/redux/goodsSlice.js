@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   goods: [],
+  allGoods: [],
   status: 'idle',
   error: null,
   update: false,
@@ -9,6 +10,16 @@ const initialState = {
   delStatus: false,
 }
 
+export const allGoods = createAsyncThunk(
+  'goods/allGoods',
+  async () => {
+    const res = await fetch(`https://api.escuelajs.co/api/v1/products/`, {
+      method: 'GET',
+    })
+    const data = await res.json()
+    return data
+  }
+)
 export const fetchGoods = createAsyncThunk(
   'goods/fetchGoods',
   async (params) => {
@@ -64,6 +75,10 @@ const goodsSlice = createSlice({
 
   extraReducers(builder) {
     builder
+      .addCase(allGoods.fulfilled, (state, action) => {
+        state.status = 'success'
+        state.allGoods = action.payload
+      })
       .addCase(fetchGoods.pending, (state) => {
         state.status = 'in progress'
       })

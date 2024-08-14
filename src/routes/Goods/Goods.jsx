@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import qs from 'qs'
 
-import { deleteGoods, fetchGoods, resetDelStatus, updateGoodsFetch } from "../../redux/goodsSlice"
-import { NewGoods, Pagination, AnswerModal, SearchByTitle, Select, ChangeGoods } from "../../components"
+import { allGoods, deleteGoods, fetchGoods, resetDelStatus, updateGoodsFetch } from "../../redux/goodsSlice"
+import { NewGoods, Pagination, AnswerModal, SearchByTitle, Select, ChangeGoods, MuiPagination } from "../../components"
 import { toggleChangeGoods, toggleNewGoods } from "../../redux/toggleSlice"
 import { resetOffset } from "../../redux/filtersSlice"
 import styles from './Goods.module.scss'
@@ -20,6 +20,10 @@ export const Goods = () => {
   const [answerToggle, setAnswerToggle] = useState(false)
   const [isStiring, setIsString] = useState()
   const [isChangeId, setIsChangeId] = useState()
+
+  useEffect(() => {
+    dispatch(allGoods())
+  }, [])
 
   useEffect(() => {
     ref.current.scrollTo(0, 0)
@@ -162,7 +166,8 @@ export const Goods = () => {
           </tbody>
         </table>
       </main>
-      <Pagination />
+      {/* <Pagination /> */}
+      <MuiPagination/>
     </div>
   )
 }
